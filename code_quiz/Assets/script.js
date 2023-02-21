@@ -1,3 +1,14 @@
+// seting the varriables
+
+
+
+
+
+
+
+
+
+
 // High scores
 function high_scores() {
     var scores = JSON.parse(localStorage.getItem(saved_scores))
@@ -27,4 +38,13 @@ function start_quiz() {
     // hides the screen at the srart of the page
     screen_start.classList.add("hidden")
     questions.classList.remove("hidden")
+
+    shuffle_questions = questions.sort(() Math.floor(Math.random()))
+    current_question = 0;
+}
+
+function timer() {
+    soconds = seconds - 1
+    counter = document.getElementById("timer")
+    counter.innerHTML = 
 }
