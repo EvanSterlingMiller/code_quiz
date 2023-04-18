@@ -7,36 +7,33 @@
     <link rel = "stylesheet" href = "Assets/style.css">
     <title>Definitive Code Quiz</title>
 </head>
-<body>
-    <header id = "top" class = "top">
-<!-- Link to the current hish scores -->
-        <section class = "high_score">
-            <!-- Timer section -->
-            <a id = "timer" ></a>
-        </section>
-    </header>
-<!-- main section -->
-    <main>
-       <section class = "wrapper">
-        <div id="start" class="start_style">
-            <h1>Code Quiz Challenge!</h1>
-            <p class = "menu"> You are about to take the Code Quiz Challenge. Answer as meny questions that you can during the time limit.</p>
-            <!-- Start the quiz button -->
-            <button id ="start_button" class ="start_button_style">Start the Quiz</button>
-
-        </div>
-         <!-- quiz section -->
-         <section id = "quiz" class = "hidden">
-            <div id="questions"></div>
-            <div id="selections"></div>
-
-            <section id="final" class="final_hide">
-                <h3 id="final">final</h3>
-            </section>
-         </section>
-       </section> 
-    </main>
-    <!-- Javascript injection -->
-    <script src="./Assets/script.js"></script>
-</body>
+    <body>
+        <header>
+            <h1>Code Quiz</h1>
+          </header>
+          <main>
+            <div id="start-screen">
+              <h2>Welcome to my Code Quiz!</h2>
+                <p>You will be prompted by a series of coding questions to assess your knowledge. This is a timed event so you will be given 30 seconds to complete the task.</p>
+              <button id="start-button">Start Quiz</button>
+            </div>
+            <div id="lastScore"></div>
+            <div id="timer">30 seconds</div>
+            <div id="question-screen" class="hidden">
+              <div id="question"></div>
+              <div id="selections"></div>
+            </div>
+            <div id="game-over-screen" class="hidden">
+              <h2>Game Over!</h2>
+              <p>Your score is: <span id="score"></span></p>
+              <form>
+                <label for="initials">Enter your initials:</label>
+                <input type="text" id="initials" name="initials">
+                <button id="save-button" type="submit">Save Score</button>
+              </form>
+            </div>
+            <div id="answerStatus"></div>
+          </main>
+          <script src=".\assets\script.js"></script>
+    </body>
 </html> 
