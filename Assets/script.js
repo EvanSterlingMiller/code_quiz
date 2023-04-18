@@ -1,32 +1,48 @@
-let question = [
+let questions = [
     {
-        questions:"Which element is used to insert the JavaScript into the HTML?",
+        question:"Which element is used to insert the JavaScript into the HTML?",
         selections: ["<Javascript>", "<js>", "<script>", "<scripting>" ],
         answer: "<script>"
     },
     {
-        questions:"What is the correct syntax refering to an external script called 'script.js?'?",
+        question:"What is the correct syntax refering to an external script called 'script.js?'?",
         selections: ["<script src = 'script.js'>", "<script name = 'script.js'>", "<script href = 'script.js'>", "<script value = 'script.js>"],
         answer: "<script src = 'script.js'>"
     },
     {
-        questions:"Which is the correct 'for' loop?",
+        question:"Which is the correct 'for' loop?",
         selections:["for (i=0; i <=5)", "for (i=0; i<=5; i++)", "for i = 1 to 5",  "for (i<=5; i++"],
         answer: "for (i=0; i<=5; i++)"
     },
     {
-        questions:"Which is the orret way to add a comment in JavaScript?",
+        question:"Which is the orret way to add a comment in JavaScript?",
         seletions:["//comment", "'commment", "<!--comment-->", "#comment"],
         answer: "//comment"
     },
     {
-        questions:"How many times will this loop iterate 'for (x=1; x<11; x++)'",
+        question:"How many times will this loop iterate 'for (x=1; x<11; x++)'",
         selections:["9", "10", "11", "0"],
         answer:"10"
     },
     {
-        questions:"What are the + - * and / symbols in JavaScript?",
-        selectors:["operators", "expressions", "functions", "objects"],
+        question:"What are the + - * and / symbols in JavaScript?",
+        selectons:["operators", "expressions", "functions", "objects"],
         answer:"operators"
     },
-]   
+    {
+        question:"The expression 'x! = y' returns 'false' if:",
+        selections:["x equals y", "x is less than y", "x is more than y", "x does not equal y"],
+        answer: "x equals y"
+    }
+]
+
+const startButton = document.getElementById("startButton")
+const questionScreen = document.getElementById("questionScreen")
+const question = document.getElementById("question")
+const selections = document.getElementById("selections")
+const score = document.getElementById("score")
+const initials = document.getElementById("initials")
+const saveButton = document.getElementById("saveButton")
+const timer = document.getElementById("timer")
+const answerStatus = document.getElementById("answerStatus")
+const latestScore = document.getElementById("latestScore")
