@@ -46,3 +46,33 @@ const saveButton = document.getElementById("saveButton")
 const timer = document.getElementById("timer")
 const answerStatus = document.getElementById("answerStatus")
 const latestScore = document.getElementById("latestScore")
+
+function startQuiz() {
+    let currentQuestion = 0
+    let currentScore = 0
+    let timeLeft = 30
+    startTimer()
+    showQuestion()
+    nextQuestion()
+    let saveData =  localStorage.getItem("previousScore")
+
+    fi (saveData != null) {
+        latestScore.innerText = "Previous Score : " + saveData
+    }
+}
+
+function startTimer() {
+    let timerInterval = setInterval(function(){
+        timeLeft--
+        timer.innerText = "Time Remaining: " + timeLeft
+        if (timeLeft <=0) {
+            clearInterval(timerInterval)
+            endQuiz()
+        }
+    }, 1000)
+}
+function showQuestion() {
+    document.getElementById("startScreen").classList.add("hidden")
+    questionScreen.classList.remove("hidden")
+    document.getElementById("gameOver").classList.add("hidden")
+}
