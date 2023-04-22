@@ -1,4 +1,3 @@
-const { clearInterval } = require("timers")
 
 let questions = [
     {
@@ -17,8 +16,8 @@ let questions = [
         answer: "for (i=0; i<=5; i++)"
     },
     {
-        question:"Which is the orret way to add a comment in JavaScript?",
-        seletions:["//comment", "'commment", "<!--comment-->", "#comment"],
+        question:"Which is the corret way to add a comment in JavaScript?",
+        selections:["//comment", "'commment", "<!--comment-->", "#comment"],
         answer: "//comment"
     },
     {
@@ -28,7 +27,7 @@ let questions = [
     },
     {
         question:"What are the + - * and / symbols in JavaScript?",
-        selectons:["operators", "expressions", "functions", "objects"],
+        selections:["operators", "expressions", "functions", "objects"],
         answer:"operators"
     },
     {
@@ -40,38 +39,50 @@ let questions = [
 
 const startButton = document.getElementById("startButton")
 const questionScreen = document.getElementById("questionScreen")
-const question = document.getElementById("question")
-const selections = document.getElementById("selections")
+const questionEl = document.getElementById("question")
+const selectionsEl = document.getElementById("selections")
 const scoreContent = document.getElementById("score")
 const initials = document.getElementById("initials")
 const saveButton = document.getElementById("saveButton")
 const timer = document.getElementById("timer")
 const answerStatus = document.getElementById("answerStatus")
 const latestScore = document.getElementById("latestScore")
+let currentQuestion
+let currentScore
+let timeLeft
+
+
 
 function startQuiz() {
-    let currentQuestion = 0
-    let currentScore = 0
-    let timeLeft = 30
-    startTimer()
-    showQuestion()
-    nextQuestion()
-    let saveData =  localStorage.getItem("previousScore")
+    currentQuestion = 0;
+    currentScore = 0;
+    timeLeft = 30;
+    startTimer();
+    showQuestion();
+    nextQuestion();
+    let saveData = localStorage.getItem("previousScore");
 
-    fi (saveData != null) {
-        latestScore.innerText = "Previous Score : " + saveData
+    if (saveData != null) {
+        latestScore.innerText = "Previous Score : " + saveData;
     }
 }
 
+function saveScore() {
+    let game = currentScore + " achieved by " + initials.value;
+    localStorage.setItem("previousScore", game);
+    latestScore.innerText = "Previous Score : " + game;
+}
+
 function startTimer() {
-    let timerInterval = setInterval(function(){
-        timeLeft--
-        timer.innerText = "Time Remaining: " + timeLeft
-        if (timeLeft <=0) {
-            clearInterval(timerInterval)
-            endQuiz()
+    timeInterval = setInterval(function() {
+        timeLeft--;
+        timer.textContent = "Time left: " + timeLeft;
+
+        if (timeLeft === 0) {
+            clearInterval(timeInterval); // Stop the timer
+            endQuiz(); // Call endQuiz() function to display end screen
         }
-    }, 1000)
+    }, 1000);
 }
 function showQuestion() {
     document.getElementById("startScreen").classList.add("hidden")
@@ -81,15 +92,15 @@ function showQuestion() {
 
 function nextQuestion() {
     if (currentQuestion < questions.length) {
-        let currentQuestion = questionss[currentQuestion]
-        question.textContent = currentQuestion.question
-        selections.innerHTML= ""
-        for (let i =0; i < currentQuestion.options.length; i=i+1){
+        let thisQuestion = questions[currentQuestion]
+        questionEl.textContent = thisQuestion.question
+        selectionsEl.innerHTML= ""
+        for (let i =0; i < thisQuestion.selections.length; i=i + 1) {
             let option = document.createElement("button")
             option.classList.add("option")
-            option.textContent = currentQuestion.options.options[i]
-            option.addEventListener("click", handleOptionClick)
-            optionsElement.appendChild(option)
+            option.textContent = thisQuestion.selections[i]
+            option.addEventListener("click", optionsClick) // fixed function name here
+            selectionsEl.appendChild(option) // fixed variable name here
         }
     } else {
         endQuiz()
@@ -98,30 +109,34 @@ function nextQuestion() {
 
 function optionsClick(event) {
     let selectedOption = event.target.textContent
-    let currentQuestionSet = questions[currentQuestion]
-    if (selectedOption === currentQuestionSet.answer) {
-        score = score + 5
-        answerStatus.innerText = "Question: correct"
+    let thisQuestion = questions[currentQuestion]
+    if (selectedOption === thisQuestion.answer) {
+        currentScore = currentScore + 5;
+        answerStatus.innerText = "Question: correct";
     } else {
-        timeLeft = timeLeft - 5
-        answerStatus.innerText= "Question: Wrong, Wrong, Worng."
+        timeLeft = timeLeft - 5;
+        answerStatus.innerText = "Question: Wrong, Wrong, Worng.";
     }
-    currentQuestion = currentQuestionSet +1
-    nextQuestion()
+    currentQuestion = currentQuestion + 1;
+    if (currentQuestion >= questions.length) { // Check if all questions answered
+        clearInterval(timeInterval)
+        endQuiz(); // Call endQuiz() function to display end screen
+    } else {
+        nextQuestion(); // Move to next question
+    }
 }
 
-function endQuiz (){
-    clearInterval(timerInterval)
+function endQuiz () {
+    clearInterval(timeInterval)
     questionScreen.classList.add("hidden")
-    document.getElementById(gameOver).classList.remove("hidden")
-    scoreContent.textContent = score
+    document.getElementById("gameOver").classList.remove("hidden")
+    scoreContent.textContent = currentScore
     answerStatus.innerText = ""
 }
 
-function saveScore() {
-    let game = score + " achieved by " + initials.value
-    localStorage.setItem("previousScore", game)
-}
 
-startButton.addEventListener("click", startQiuz)
+
+
+
+startButton.addEventListener("click", startQuiz)
 saveButton.addEventListener("click", saveScore)
