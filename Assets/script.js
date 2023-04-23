@@ -1,4 +1,3 @@
-
 let questions = [
     {
         question:"Which element is used to insert the JavaScript into the HTML?",
